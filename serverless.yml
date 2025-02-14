@@ -18,10 +18,22 @@ provider:
             - lambda:InvokeFunction
           Resource: "*"
 
+package:
+  patterns:
+    - "handler.py"
+    - "requirements.txt"
+    - "*.py"               # Include all Python files
+    - "!node_modules/**"   # Exclude node_modules
+    - "!.git/**"           # Exclude git files
+    - "!layers/**"         # Exclude layers directory
+    - "!__pycache__/**"    # Exclude Python cache
+    - "!.pytest_cache/**"  # Exclude pytest cache
+    - "!tests/**"          # Exclude tests directory
+
 layers:
   dependencies:
     path: layers/python
-    description: Python dependencies for Lambda function
+    description: Python dependencies
     compatibleRuntimes:
       - python3.11
 

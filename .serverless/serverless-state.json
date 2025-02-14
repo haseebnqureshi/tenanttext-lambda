@@ -122,10 +122,10 @@
             "Properties": {
               "Content": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3770c538-8dc4",
-                "S3Key": "serverless/hello-world-python/dev/1739519918117-2025-02-14T07:58:38.117Z/dependencies.zip"
+                "S3Key": "serverless/hello-world-python/dev/1739522150354-2025-02-14T08:35:50.354Z/dependencies.zip"
               },
               "LayerName": "dependencies",
-              "Description": "Python dependencies for Lambda function",
+              "Description": "Python dependencies",
               "CompatibleRuntimes": [
                 "python3.11"
               ]
@@ -136,7 +136,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3770c538-8dc4",
-                "S3Key": "serverless/hello-world-python/dev/1739520076828-2025-02-14T08:01:16.828Z/hello-world-python.zip"
+                "S3Key": "serverless/hello-world-python/dev/1739522150354-2025-02-14T08:35:50.354Z/hello-world-python.zip"
               },
               "Handler": "handler.hello",
               "Runtime": "python3.11",
@@ -159,14 +159,14 @@
               "HelloLogGroup"
             ]
           },
-          "HelloLambdaVersionZx8oOBLeNUtqbOnllX6GGGYzBMcVuyKw3MggehH6E0": {
+          "HelloLambdaVersionm6rsz21YHf2LqShvaByTbVyH7GTczmSAi6zBS5XvS9I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "9+y/aGfV3nayTJX+pBBzDC0blfUp4ZSMo7l5jtiNhTM="
+              "CodeSha256": "n3P3/cN5P+FABHYkc5dU2y77/21O44B6IhJ/bbJSSwI="
             }
           },
           "HttpApi": {
@@ -298,14 +298,14 @@
           },
           "DependenciesLambdaLayerHash": {
             "Description": "Current Lambda layer hash",
-            "Value": "c4b4cab7e8bdf290134232cc2c4154066c82374c",
+            "Value": "47544ded13dd776f187134ca4389d60382fac401",
             "Export": {
               "Name": "sls-hello-world-python-dev-DependenciesLambdaLayerHash"
             }
           },
           "DependenciesLambdaLayerS3Key": {
             "Description": "Current Lambda layer S3Key",
-            "Value": "serverless/hello-world-python/dev/1739519918117-2025-02-14T07:58:38.117Z/dependencies.zip",
+            "Value": "serverless/hello-world-python/dev/1739522150354-2025-02-14T08:35:50.354Z/dependencies.zip",
             "Export": {
               "Name": "sls-hello-world-python-dev-DependenciesLambdaLayerS3Key"
             }
@@ -313,7 +313,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionZx8oOBLeNUtqbOnllX6GGGYzBMcVuyKw3MggehH6E0"
+              "Ref": "HelloLambdaVersionm6rsz21YHf2LqShvaByTbVyH7GTczmSAi6zBS5XvS9I"
             },
             "Export": {
               "Name": "sls-hello-world-python-dev-HelloLambdaFunctionQualifiedArn"
@@ -380,7 +380,7 @@
         "timeout": 6,
         "runtime": "python3.11",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionZx8oOBLeNUtqbOnllX6GGGYzBMcVuyKw3MggehH6E0"
+        "versionLogicalId": "HelloLambdaVersionm6rsz21YHf2LqShvaByTbVyH7GTczmSAi6zBS5XvS9I"
       }
     },
     "configValidationMode": "warn",
@@ -392,17 +392,33 @@
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
+      "package": {
+        "patterns": [
+          "handler.py",
+          "requirements.txt",
+          "*.py",
+          "!node_modules/**",
+          "!.git/**",
+          "!layers/**",
+          "!__pycache__/**",
+          "!.pytest_cache/**",
+          "!tests/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/hello-world-python/dev/code-artifacts",
+        "deploymentBucket": "serverless-framework-deployments-us-east-1-3770c538-8dc4",
+        "artifact": "/Users/haseebqureshi/Code/tenanttext/lambda/.serverless/hello-world-python.zip",
+        "artifactDirectoryName": "serverless/hello-world-python/dev/1739522150354-2025-02-14T08:35:50.354Z"
+      },
       "layers": {
         "dependencies": {
           "path": "layers/python",
-          "description": "Python dependencies for Lambda function",
+          "description": "Python dependencies",
           "compatibleRuntimes": {
             "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DependenciesLambdaLayer\"][\"Properties\"][\"CompatibleRuntimes\"]"
           },
           "package": {
             "artifact": "/Users/haseebqureshi/Code/tenanttext/lambda/.serverless/dependencies.zip"
-          },
-          "artifactAlreadyUploaded": true
+          }
         }
       },
       "functions": {
@@ -419,7 +435,7 @@
     "artifact": "/Users/haseebqureshi/Code/tenanttext/lambda/.serverless/hello-world-python.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/hello-world-python/dev/1739520076828-2025-02-14T08:01:16.828Z",
+    "artifactDirectoryName": "serverless/hello-world-python/dev/1739522150354-2025-02-14T08:35:50.354Z",
     "artifact": "hello-world-python.zip"
   }
 }
