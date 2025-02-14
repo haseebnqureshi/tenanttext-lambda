@@ -1,0 +1,27 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: entreheart
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: tenanttext
+service: hello-world-python
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-1
+  httpApi:
+    cors: true
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - lambda:InvokeFunction
+          Resource: "*"
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get 
