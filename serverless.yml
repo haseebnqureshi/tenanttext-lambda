@@ -6,7 +6,7 @@ service: hello-world-python
 
 provider:
   name: aws
-  runtime: python3.9
+  runtime: python3.11
   region: us-east-1
   httpApi:
     cors: true
@@ -18,9 +18,19 @@ provider:
             - lambda:InvokeFunction
           Resource: "*"
 
+layers:
+  dependencies:
+    path: layers/python
+    description: Python dependencies for Lambda function
+    compatibleRuntimes:
+      - python3.11
+
 functions:
   hello:
     handler: handler.hello
+    layers:
+      - !Ref DependenciesLambdaLayer
+      - arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p311-numpy:2
     events:
       - httpApi:
           path: /hello
