@@ -38,7 +38,7 @@ def hello(event, context):
             
         try:
             import langchain_openai
-            available_modules['langchain_openai'] = langchain_openai.__version__
+            available_modules['langchain_openai'] = 'Imported successfully'
             logger.info("langchain_openai imported successfully")
         except Exception as e:
             available_modules['langchain_openai'] = f"Failed to import: {str(e)}"
